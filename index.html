@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./lib/CSInterface.js"></script>
+<script src="./js/ext.js"></script>
+
+<link id="ppstyle" rel="stylesheet" type="text/css"
+	href="./css/style.css">
+<title>DrawToScript</title>
+</head>
+
+<body onLoad="onLoaded()">
+	<div id="content">
+		<p>
+			<button class="default" id="btn_ILST"
+				onClick="onClickButtonGenerate()">Generate</button>
+			<select id="scriptType">
+				<option value="easeljs">EaselJS tiny API</option>
+			</select>
+		</p>
+		<p>
+			<input type="text" name="prefix" value="Prefix">
+			<button class="default" id="btn_ILST" onClick="onClickButtonCopy()">Copy</button>
+		</p>
+		<textarea width="100%" height="100%" readonly id="output"></textarea>
+	</div>
+</body>
+
+</html>
