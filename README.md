@@ -4,13 +4,11 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
 ## Features
 
  * Supported Export Formats
-   * EaselJS tiny API /  [PIXI_tiny](https://github.com/GreyRook/PIXI_tiny) (EaselJS tiny API compatibility for [pixi.js v3](http://www.pixijs.com/))
+   * EaselJS tiny API
 
 ## Usage
  * Install the release package using Adobe Extension Manager
   
-## TODO
+## State
 
- * GUI
- * Tests
- * More Export options
+Alpha / Concept State.
