@@ -9,6 +9,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
 
 ## Usage
  * Install the release package using Adobe Extension Manager
+ * OR: Copy Draw2Script folder to C:\Users\<username>\AppData\Roaming\Adobe\CEP\extensions
   
 ## State
 
