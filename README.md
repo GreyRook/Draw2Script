@@ -5,6 +5,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
 
  * Supported Export Formats
    * EaselJS tiny API
+   * PIXI_tiny API
 
 ## Usage
  * Install the release package using Adobe Extension Manager
