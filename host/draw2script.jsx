@@ -115,7 +115,7 @@ function createJSParsePathItem(pathItem) {
 				var previousPoint = pathPoints[i%pathPoints.length];
 				var currentPoint = pathPoints[(i+1)%pathPoints.length];
 				
-				if(pathPoints[i].pointType == "PointType.CORNER") {
+				if(currentPoint.anchor == currentPoint.leftDirection && currentPoint.anchor == currentPoint.rightDirection) {
 					var lineToX = currentPoint.anchor[0] - previousPoint.anchor[0];
 					var lineToY = -1*currentPoint.anchor[1] + previousPoint.anchor[1];
 
