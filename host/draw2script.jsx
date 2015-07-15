@@ -27,25 +27,35 @@ function generateCreateJS() {
 	
 }
 
+function getColor(color, opacity) {
+	var r,g,b;
+	var a = opacity/100;
+	
+	if(color.typename == "RGBColor") {
+		r = color.red;
+		g = color.green;
+		b = color.blue;
+	} else if(color.typename == "CMYKColor") {
+		//CYMK Color Codes
+		var k = color.black;
+		var c = color.cyan;
+		var m = color.magenta;
+		var y = color.yellow;
+
+		//RGB Color Codes
+		r = 255 * (1 - c/100) * (1 - k/100);
+		g = 255 * (1 - m/100) * (1 - k/100);
+		b = 255 * (1 - y/100) * (1 - k/100);		 
+	}
+	//Begin fill with RGBA values
+	return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
+}
 function createJSParsePathItem(pathItem) {
 	var instruction = "";
 	var pathPoints = pathItem.selectedPathPoints;
 	if(pathItem.filled) {
 		
-		//CYMK Color Codes
-		var k = pathItem.fillColor.black;
-		var c = pathItem.fillColor.cyan;
-		var m = pathItem.fillColor.magenta;
-		var y = pathItem.fillColor.yellow;
-		
-		//RGB Color Codes
-		var r = 255 * (1 - c/100) * (1 - k/100);
-		var g = 255 * (1 - m/100) * (1 - k/100);
-		var b = 255 * (1 - y/100) * (1 - k/100);
-		var a = 1;
-		
-		//Begin fill with RGBA values
-		instruction += ".f('rgba(" + r + ", " + g + ", " + b + ", " + a + ")')";
+		instruction += ".f('" + getColor(pathItem.fillColor, pathItem.opacity) + "')";
 	}
 	if(pathItem.stroked) {
 		var strokeWidth = pathItem.strokeWidth;
@@ -68,20 +78,7 @@ function createJSParsePathItem(pathItem) {
 		var strokeMiterLimit = pathItem.strokeMiterLimit;
 		instruction += ".ss(" + strokeWidth + "," + strokeCap + "," + strokeJoin + "," + strokeMiterLimit + ")";
 		
-		//CMYK Color Codes
-		var k = pathItem.strokeColor.black;
-		var c = pathItem.strokeColor.cyan;
-		var m = pathItem.strokeColor.magenta;
-		var y = pathItem.strokeColor.yellow;
-		
-		//RGB Color Codes
-		var r = 255 * (1 - c/100) * (1 - k/100);
-		var g = 255 * (1 - m/100) * (1 - k/100);
-		var b = 255 * (1 - y/100) * (1 - k/100);
-		var a = 1;
-		
-		//Begin stroke with RGBA values
-		instruction += ".s('rgba(" + r + ", " + g + ", " + b + ", " + a + ")')";
+		instruction += ".s('" + getColor(pathItem.strokeColor, pathItem.opacity) + "')";
 	}
 	if(pathItem.stroked) {
 		var strokeDashes = pathItem.strokeDashes;
