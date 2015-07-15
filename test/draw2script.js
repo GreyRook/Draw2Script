@@ -1,6 +1,7 @@
 testGetColor();
 testConvertBitToBase64();
 testConvertToHex();
+testConvertNumberToBits();
 
 function testGetColor() {
 	var testColor = {
@@ -34,10 +35,6 @@ function testGetColor() {
 	expect(getColor(testColor, testOpactiy)).to.eql("0x000000");
 }
 
-function testGetStrokeStyle() {
-	
-}
-
 function testConvertBitToBase64() {
 	var bits = ["000000", "000001", "111111000000"];
 	var base64 = ["A", "B", "/A"];
@@ -55,4 +52,14 @@ function testConvertToHex() {
 }
 
 function testConvertNumberToBits() {
+	var number = [0,0.2,0.4,0.6,0.8,10.0,100.0,200000.0,-0.1,-2.0];
+	var bits12 = ["000000000000","000000000010","000000000100","000000000110","000000001000",
+	              "000001100100","001111101000","overflow","100000000001","100000010100"];
+	var bits18 = ["000000000000000000","000000000000000010","000000000000000100",
+	              "000000000000000110","000000000000001000","000000000001100100",
+	              "000000001111101000","overflow","100000000000000001","100000000000010100"];
+	for(var i = 0; i < number.length; i++) {
+		expect(convertNumberToBits(number[i],12)).to.eql(bits12[i]);
+		expect(convertNumberToBits(number[i],18)).to.eql(bits18[i]);
+	}
 }
