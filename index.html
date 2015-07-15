@@ -14,18 +14,19 @@
 <body onLoad="onLoaded()">
 	<div id="content">
 		<p>
-			<button class="default" id="btn_ILST"
-				onClick="onClickButtonGenerate()">Generate</button>
 			<select id="scriptType">
 				<option value="easeljs">EaselJS tiny API</option>
 				<option value="pixijs">PixiJS tiny API</option>
 			</select>
+			<button class="default" id="btn_ILST"
+				onClick="onClickButtonGenerate()">Generate</button>
 		</p>
 		<p>
-			<input type="text" name="prefix" value="Prefix">
-			<button class="default" id="btn_ILST" onClick="onClickButtonCopy()">Copy</button>
+			Prefix: <input type="text" name="prefix" value="Prefix" id="prefix">
+			<button class="default" id="btn_ILST" onClick="onClickButtonSelect()">Select</button>
 		</p>
-		<textarea width="100%" height="100%" readonly id="output"></textarea>
+		<textarea readonly id="output"></textarea>
+		<p><input type="checkbox" name="wrap" value="Wrap" id="wrap" onClick="onClickWrap()">Wrap</p>
 	</div>
 </body>
 

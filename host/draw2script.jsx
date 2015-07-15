@@ -23,7 +23,7 @@ var hexColor = false;
 
 function generateCreateJS(params) {
 	var objects = app.activeDocument.selection;
-	var instruction = "graphics";
+	var instruction = "";
 	hexColor = params.hexColor;
 	cropBox = app.activeDocument.cropBox;
 	for(var i = objects.length -  1; i >= 0; i--) {
@@ -232,6 +232,9 @@ function convertNumberToBits(number, size) {
     while(result.length < size-1) {
         result = "0" + result;
     }
-    var bitsCount = result.length;
-    return sign + result;
+    if(result.length > size) {
+    	return "overflow";
+    } else {
+    	return sign + result;
+    }
 }
