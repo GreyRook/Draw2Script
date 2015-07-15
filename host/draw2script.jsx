@@ -19,9 +19,12 @@ var unusedBits = "00";
 
 var cropBox;
 
-function generateCreateJS() {
+var hexColor = false;
+
+function generateCreateJS(params) {
 	var objects = app.activeDocument.selection;
 	var instruction = "graphics";
+	hexColor = params.hexColor;
 	cropBox = app.activeDocument.cropBox;
 	for(var i = objects.length -  1; i >= 0; i--) {
 		if(objects[i].typename == "PathItem") {
@@ -59,7 +62,11 @@ function getColor(color, opacity) {
 		b = 255 * (1 - y/100) * (1 - k/100);		 
 	}
 	//Begin fill with RGBA values
-	return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
+	if(hexColor) {
+		return "0x" + convertToHex(r) + convertToHex(g) + convertToHex(b); 
+	} else {
+		return "rgba('" + r + "," + g + "," + b + "," + a + "')";
+	}
 }
 
 function getStrokeStyle(pathItem) {
@@ -91,11 +98,11 @@ function createJSParsePathItem(pathItem) {
 	var pathPoints = pathItem.selectedPathPoints;
 
 	if(pathItem.filled) {
-		instruction += ".f('" + getColor(pathItem.fillColor, pathItem.opacity) + "')";
+		instruction += ".f(" + getColor(pathItem.fillColor, pathItem.opacity) + ")";
 	}
 	if(pathItem.stroked) {
 		instruction += ".ss(" + getStrokeStyle(pathItem) + ")";
-		instruction += ".s('" + getColor(pathItem.strokeColor, pathItem.opacity) + "')";
+		instruction += ".s(" + getColor(pathItem.strokeColor, pathItem.opacity) + ")";
 	}
 	if(pathItem.stroked) {
 		var strokeDashes = pathItem.strokeDashes;
@@ -200,6 +207,14 @@ function convertBitToBase64(bits) {
 	return base64String;
 }
 
+function convertToHex(number) {
+    var hex = number.toString(16);
+    if(hex.length < 2) {
+    	hex = "0" + hex;
+    }
+    return hex;
+}	
+
 /*
  * Floors a number an then converts it to a bit String. When the number is negative the MSB will
  * be 1, when it is positive the MSB will be 0.
@@ -217,5 +232,3 @@ function convertNumberToBits(number, size) {
     var bitsCount = result.length;
     return sign + result;
 }
-
-generateCreateJS();

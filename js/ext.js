@@ -13,8 +13,11 @@ function onClickButtonGenerate() {
 	// Das Textfeld für die Ausgabe in einer Variablen hinterlegen
 	var textField = document.getElementById("output");
 	if(scriptTypesValue == scriptTypesElement.options[0].value) {
-		// Quellcode generieren für Javascript
-		new CSInterface().evalScript("generateCreateJS()", function(codeString) {
+		new CSInterface().evalScript("generateCreateJS({hexColor : false })", function(codeString) {
+			textField.value = codeString;
+		});
+	} else if(scriptTypesValue == scriptTypesElement.options[1].value) {
+		new CSInterface().evalScript("generateCreateJS({hexColor : true })", function(codeString) {
 			textField.value = codeString;
 		});
 	}
