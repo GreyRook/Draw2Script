@@ -65,7 +65,7 @@ function getColor(color, opacity) {
 	if(hexColor) {
 		return "0x" + convertToHex(r) + convertToHex(g) + convertToHex(b); 
 	} else {
-		return "rgba('" + r + "," + g + "," + b + "," + a + "')";
+		return "'rgba(" + Math.round(r) + "," + Math.round(g) + "," + Math.round(b) + "," + a + ")'";
 	}
 }
 
@@ -207,8 +207,11 @@ function convertBitToBase64(bits) {
 	return base64String;
 }
 
+/*
+ * Convers a number to a two letter hex value
+ */
 function convertToHex(number) {
-    var hex = number.toString(16);
+    var hex = Math.round(number).toString(16);
     if(hex.length < 2) {
     	hex = "0" + hex;
     }
