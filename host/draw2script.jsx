@@ -50,6 +50,29 @@ function getColor(color, opacity) {
 	//Begin fill with RGBA values
 	return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
 }
+function getStrokeStyle(pathItem) {
+	var strokeWidth = pathItem.strokeWidth;
+	var strokeCap;
+	var strokeJoin;
+	var strokeMiterLimit = pathItem.strokeMiterLimit;
+
+	if(pathItem.strokeCap == "StrokeCap.BUTTENDCAP") {
+		strokeCap = 0;
+	} else if(pathItem.strokeCap == "StrokeCap.PROJECTINGENDCAP")  {
+		strokeCap = 1;
+	} else if(pathItem.strokeCap == "StrokeCap.ROUNDENDCAP") {
+		strokeCap = 2;
+	}
+
+	if(pathItem.strokeJoin == "StrokeJoin.MITERENDJOIN") {
+		strokeJoin = 0;
+	} else if(pathItem.strokeJoin == "StrokeJoin.ROUNDENDJOIN") {
+		strokeJoin = 1;
+	} else if(pathItem.strokeJoin == "StrokeJoin.BEVELENDJOIN") {
+		strokeJoin = 2;
+	}
+	return strokeWidth + "," + strokeCap + "," + strokeJoin + "," + strokeMiterLimit;
+}
 function createJSParsePathItem(pathItem) {
 	var instruction = "";
 	var pathPoints = pathItem.selectedPathPoints;
@@ -58,26 +81,7 @@ function createJSParsePathItem(pathItem) {
 		instruction += ".f('" + getColor(pathItem.fillColor, pathItem.opacity) + "')";
 	}
 	if(pathItem.stroked) {
-		var strokeWidth = pathItem.strokeWidth;
-		var strokeCap;
-		if(pathItem.strokeCap == "StrokeCap.BUTTENDCAP") {
-			strokeCap = 0;
-		} else if(pathItem.strokeCap == "StrokeCap.PROJECTINGENDCAP")  {
-			strokeCap = 1;
-		} else if(pathItem.strokeCap == "StrokeCap.ROUNDENDCAP") {
-			strokeCap = 2;
-		}
-		var strokeJoin;
-		if(pathItem.strokeJoin == "StrokeJoin.MITERENDJOIN") {
-			strokeJoin = 0;
-		} else if(pathItem.strokeJoin == "StrokeJoin.ROUNDENDJOIN") {
-			strokeJoin = 1;
-		} else if(pathItem.strokeJoin == "StrokeJoin.BEVELENDJOIN") {
-			strokeJoin = 2;
-		}
-		var strokeMiterLimit = pathItem.strokeMiterLimit;
-		instruction += ".ss(" + strokeWidth + "," + strokeCap + "," + strokeJoin + "," + strokeMiterLimit + ")";
-		
+		instruction += ".ss(" + getStrokeStyle(pathItem) + ")";
 		instruction += ".s('" + getColor(pathItem.strokeColor, pathItem.opacity) + "')";
 	}
 	if(pathItem.stroked) {
