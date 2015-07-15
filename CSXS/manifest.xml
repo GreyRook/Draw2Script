@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ExtensionManifest Version="5.0" ExtensionBundleId="com.greyrook.Draw2Script" ExtensionBundleVersion="0.1.0"
+<ExtensionManifest Version="5.0" ExtensionBundleId="com.greyrook.Draw2Script" ExtensionBundleVersion="0.0.1"
 		ExtensionBundleName="Draw2Script" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
 		<Extension Id="com.greyrook.Draw2Script.extension" Version="1.0" />
