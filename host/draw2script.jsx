@@ -1,11 +1,16 @@
-//Array of Base64 characters
-var BASE_64 = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9","+","/"];
+﻿//Array of Base64 characters
+var BASE_64 = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U",
+               "V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
+               "q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9","+",
+               "/"];
 
 //Map instructions to values
-var instructions = {"moveTo": "000", "lineTo": "001", "quadraticCurveTo": "010", "bezierCurveTo": "011", "closePath": "100"};
+var instructions = {"moveTo": "000", "lineTo": "001", "quadraticCurveTo": "010", 
+		"bezierCurveTo": "011", "closePath": "100"};
 
 //Map instructions to parameter count
-var paramCount = {"moveTo": 2, "lineTo": 2, "quadraticCurveTo": 4, "bezierCurveTo": 6, "closePath": 0};
+var paramCount = {"moveTo": 2, "lineTo": 2, "quadraticCurveTo": 4, "bezierCurveTo": 6,
+		"closePath": 0};
 
 //Map size of position property to bits
 var sizeOfPositions = {"12": 0, "18": 1};
@@ -26,6 +31,7 @@ function generateCreateJS() {
 	return instruction;
 	
 }
+
 
 function getColor(color, opacity) {
 	var r,g,b;
@@ -50,6 +56,7 @@ function getColor(color, opacity) {
 	//Begin fill with RGBA values
 	return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
 }
+
 function getStrokeStyle(pathItem) {
 	var strokeWidth = pathItem.strokeWidth;
 	var strokeCap;
@@ -73,11 +80,12 @@ function getStrokeStyle(pathItem) {
 	}
 	return strokeWidth + "," + strokeCap + "," + strokeJoin + "," + strokeMiterLimit;
 }
+
 function createJSParsePathItem(pathItem) {
 	var instruction = "";
 	var pathPoints = pathItem.selectedPathPoints;
+
 	if(pathItem.filled) {
-		
 		instruction += ".f('" + getColor(pathItem.fillColor, pathItem.opacity) + "')";
 	}
 	if(pathItem.stroked) {
@@ -89,52 +97,46 @@ function createJSParsePathItem(pathItem) {
 		var strokeDashOffset = 0;
 		instruction += ".sd([" + strokeDashes + "]," + strokeDashOffset + ")";
 	}
-	
 	if(pathPoints.length > 0) {
 		//Easeljs uses absolute movement for the first command
 		var moveToX = pathPoints[0].anchor[0];
 		var moveToY = -1*pathPoints[0].anchor[1];
 
-		
 		//12 bits you can used numbers up to 2047, 18 bits you can use numbers up to 131071. 
 		var sizeOfPosition = 18;
 
 		var bitInstruction = instructions["moveTo"] + sizeOfPositions[sizeOfPosition] + unusedBits +
-		converNumberToBits(moveToX, sizeOfPosition) + converNumberToBits(moveToY, sizeOfPosition);
+		convertNumberToBits(moveToX, sizeOfPosition) + convertNumberToBits(moveToY, sizeOfPosition);
 
 		instruction += ".p('" + convertBitToBase64(bitInstruction);
+
 		if(pathPoints.length > 1) {
 			for(var i = 0; i < (pathItem.closed ? pathPoints.length : (pathPoints.length - 1)); i++) {
-				var previousX = pathPoints[i].anchor[0];
-				var previousY = -1*pathPoints[i].anchor[1];
-
+				var previousPoint = pathPoints[i%pathPoints.length];
+				var currentPoint = pathPoints[(i+1)%pathPoints.length];
+				
 				if(pathPoints[i].pointType == "PointType.CORNER") {
-					/*
-					 * Illustrator uses negative y-values, when Easeljs uses positive y-values. So y-value must
-					 * be multiplied by -1 to archive the same result.
-					 * Easeljs uses relative movement after the first command.
-					 */
-					var lineToX = pathPoints[(i+1)%pathPoints.length].anchor[0] - previousX;
-					var lineToY = -1*pathPoints[(i+1)%pathPoints.length].anchor[1] - previousY;
+					var lineToX = currentPoint.anchor[0] - previousPoint.anchor[0];
+					var lineToY = -1*currentPoint.anchor[1] + previousPoint.anchor[1];
 
 					bitInstruction = instructions["lineTo"] + sizeOfPositions[sizeOfPosition] + unusedBits +
-					converNumberToBits(lineToX, sizeOfPosition) + converNumberToBits(lineToY, sizeOfPosition);
+					convertNumberToBits(lineToX, sizeOfPosition) + convertNumberToBits(lineToY, sizeOfPosition);
 
 					instruction += convertBitToBase64(bitInstruction);
 				} else {			 
-					var anchorX = pathPoints[(i+1)%pathPoints.length].anchor[0] - pathPoints[(i+1)%pathPoints.length].leftDirection[0];
-					var anchorY = -1*pathPoints[(i+1)%pathPoints.length].anchor[1] + 1*pathPoints[(i+1)%pathPoints.length].leftDirection[1];
+					var anchorX = currentPoint.anchor[0] - currentPoint.leftDirection[0];
+					var anchorY = -1*currentPoint.anchor[1] + currentPoint.leftDirection[1];
 					
-					var leftDirectionX = pathPoints[(i+1)%pathPoints.length].leftDirection[0] - pathPoints[(i)%pathPoints.length].rightDirection[0];
-					var leftDirectionY = -1*pathPoints[(i+1)%pathPoints.length].leftDirection[1] + 1*pathPoints[(i)%pathPoints.length].rightDirection[1] ;
+					var leftDirectionX = currentPoint.leftDirection[0] - previousPoint.rightDirection[0];
+					var leftDirectionY = -1*currentPoint.leftDirection[1] + previousPoint.rightDirection[1] ;
 					
-					var rightDirectionX = pathPoints[(i)%pathPoints.length].rightDirection[0] - previousX;
-					var rightDirectionY = -1*pathPoints[(i)%pathPoints.length].rightDirection[1] - previousY;
+					var rightDirectionX = previousPoint.rightDirection[0] - previousPoint.anchor[0];
+					var rightDirectionY = -1*previousPoint.rightDirection[1] + previousPoint.anchor[1];
 					
 					bitInstruction = instructions["bezierCurveTo"] + sizeOfPositions[sizeOfPosition] + unusedBits +
-					converNumberToBits(rightDirectionX, sizeOfPosition) + converNumberToBits(rightDirectionY, sizeOfPosition) +
-					converNumberToBits(leftDirectionX, sizeOfPosition) + converNumberToBits(leftDirectionY, sizeOfPosition) +
-					converNumberToBits(anchorX, sizeOfPosition) + converNumberToBits(anchorY, sizeOfPosition);
+					convertNumberToBits(rightDirectionX, sizeOfPosition) + convertNumberToBits(rightDirectionY, sizeOfPosition) +
+					convertNumberToBits(leftDirectionX, sizeOfPosition) + convertNumberToBits(leftDirectionY, sizeOfPosition) +
+					convertNumberToBits(anchorX, sizeOfPosition) + convertNumberToBits(anchorY, sizeOfPosition);
 					
 					instruction += convertBitToBase64(bitInstruction);
 				}
@@ -185,7 +187,7 @@ function convertBitToBase64(bits) {
  * @param number Number which will be converted to a bit String
  * @param size Number of bits which will be used to represent number
  */
-function converNumberToBits(number, size) {
+function convertNumberToBits(number, size) {
   //Easeljs has an accuracy of 1/10 of a pixel.
     number = number*10;
 	var sign = (number < 0 ? "1" : "0");
