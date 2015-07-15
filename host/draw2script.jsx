@@ -17,14 +17,19 @@ var sizeOfPositions = {"12": 0, "18": 1};
 
 var unusedBits = "00";
 
+var cropBox;
+
 function generateCreateJS() {
 	var objects = app.activeDocument.selection;
 	var instruction = "graphics";
+	cropBox = app.activeDocument.cropBox;
 	for(var i = objects.length -  1; i >= 0; i--) {
 		if(objects[i].typename == "PathItem") {
 			instruction += createJSParsePathItem(objects[i]);
 		} else if(objects[i].typename == "GroupItem") {
 			instruction += createJSParseGroupItem(objects[i]);
+		} else if(objects[i].typename == "CompoundPathItem") {
+			instruction += createJSParseCompoundPathItem(objects[i]);
 		}
 	}
 	instruction += ".cp()";
@@ -99,8 +104,8 @@ function createJSParsePathItem(pathItem) {
 	}
 	if(pathPoints.length > 0) {
 		//Easeljs uses absolute movement for the first command
-		var moveToX = pathPoints[0].anchor[0];
-		var moveToY = -1*pathPoints[0].anchor[1];
+		var moveToX = pathPoints[0].anchor[0] + cropBox[0];
+		var moveToY = -1*pathPoints[0].anchor[1] + cropBox[1];
 
 		//12 bits you can used numbers up to 2047, 18 bits you can use numbers up to 131071. 
 		var sizeOfPosition = 18;
@@ -126,17 +131,21 @@ function createJSParsePathItem(pathItem) {
 				} else {			 
 					var anchorX = currentPoint.anchor[0] - currentPoint.leftDirection[0];
 					var anchorY = -1*currentPoint.anchor[1] + currentPoint.leftDirection[1];
-					
+
 					var leftDirectionX = currentPoint.leftDirection[0] - previousPoint.rightDirection[0];
 					var leftDirectionY = -1*currentPoint.leftDirection[1] + previousPoint.rightDirection[1] ;
-					
+
 					var rightDirectionX = previousPoint.rightDirection[0] - previousPoint.anchor[0];
 					var rightDirectionY = -1*previousPoint.rightDirection[1] + previousPoint.anchor[1];
-					
-					bitInstruction = instructions["bezierCurveTo"] + sizeOfPositions[sizeOfPosition] + unusedBits +
-					convertNumberToBits(rightDirectionX, sizeOfPosition) + convertNumberToBits(rightDirectionY, sizeOfPosition) +
-					convertNumberToBits(leftDirectionX, sizeOfPosition) + convertNumberToBits(leftDirectionY, sizeOfPosition) +
-					convertNumberToBits(anchorX, sizeOfPosition) + convertNumberToBits(anchorY, sizeOfPosition);
+
+					bitInstruction = instructions["bezierCurveTo"] + 
+						sizeOfPositions[sizeOfPosition] + unusedBits +
+						convertNumberToBits(rightDirectionX, sizeOfPosition) + 
+						convertNumberToBits(rightDirectionY, sizeOfPosition) +
+						convertNumberToBits(leftDirectionX, sizeOfPosition) + 
+						convertNumberToBits(leftDirectionY, sizeOfPosition) +
+						convertNumberToBits(anchorX, sizeOfPosition) + 
+						convertNumberToBits(anchorY, sizeOfPosition);
 					
 					instruction += convertBitToBase64(bitInstruction);
 				}
@@ -163,9 +172,19 @@ function createJSParseGroupItem(groupItem) {
 	for(var i = 0; i < groupItem.pathItems.length; i++) {
 		instruction += createJSParsePathItem(groupItem.pathItems[i]);
 	}
+	for(var i = 0; i < groupItem.compoundPathItems.length; i++) {
+		instruction += createJSParseCompoundPathItem(groupItem.compoundPathItems[i]);
+	}
 	return instruction;
 }
 
+function createJSParseCompoundPathItem(compoundPathItem) {
+	var instruction = "";
+	for(var i = 0; i < compoundPathItem.pathItems.length; i++) {
+		instruction += createJSParsePathItem(compoundPathItem.pathItems[i]);
+	}
+	return instruction;
+}
 /*
  * Converts a string of bits to a base64 string
  */
