@@ -1,3 +1,5 @@
+<a href="https://travis-ci.org/GreyRook/Draw2Script)"><img src="https://travis-ci.org/GreyRook/Draw2Script.svg?branch=master" align=right></a>
+
 # Draw2Script
 Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://drawscri.pt/)
 
