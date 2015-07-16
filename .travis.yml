@@ -1,0 +1,8 @@
+language: node_s
+python: "0.12"
+install:
+  - npm install -g jasmine
+script:
+  - jasmine
+after_success:
+  coveralls
