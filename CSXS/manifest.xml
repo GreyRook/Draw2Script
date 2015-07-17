@@ -22,7 +22,7 @@
 			<DispatchInfo >
 				<Resources>
 				<MainPath>./index.html</MainPath>
-				<ScriptPath>./host/draw2script.jsx</ScriptPath>
+				<ScriptPath>./host/main.jsx</ScriptPath>
 				</Resources>
 				<Lifecycle>
 					<AutoVisible>true</AutoVisible>

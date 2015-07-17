@@ -22,19 +22,15 @@ function onClickButtonGenerate() {
 	// Das Textfeld für die Ausgabe in einer Variablen hinterlegen
 	var textField = document.getElementById("output");
 	var prefixField = document.getElementById("prefix");
-	if(scriptTypesValue == scriptTypesElement.options[0].value) {
-		new CSInterface().evalScript("generateCreateJS({hexColor : false })", function(codeString) {
-			textField.value = prefixField.value + codeString;
-		});
-	} else if(scriptTypesValue == scriptTypesElement.options[1].value) {
-		new CSInterface().evalScript("generateCreateJS({hexColor : true })", function(codeString) {
-			textField.value = prefixField.value + codeString;
-		});
-	} else if(scriptTypesValue == scriptTypesElement.options[2].value) {
-		new CSInterface().evalScript("generatePixiJson()", function(codeString) {
-			textField.value = codeString;
-		})
-	}
+	new CSInterface().evalScript("generateJSON()", function(json) {
+		if(scriptTypesValue == scriptTypesElement.options[0].value) {
+			textField.value = prefixField.value + new createjs().generate(JSON.parse(json));
+		} else if(scriptTypesValue == scriptTypesElement.options[1].value) {
+			textField.value = prefixField.value + new pixitiny().generate(JSON.parse(json));
+		} else if(scriptTypesValue == scriptTypesElement.options[2].value) {
+			textField.value = generatePixiGraphics(JSON.parse(json));
+		}
+	});
 }
 
 function onLoaded() {
