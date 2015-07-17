@@ -10,4 +10,5 @@
 * 2015-07-17: Alpha release 0.0.3
   * Support for JSON
   * Better UI
+  * Error handling for "nothing selected" and "overflow"
 
