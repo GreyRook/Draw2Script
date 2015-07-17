@@ -30,6 +30,10 @@ function onClickButtonGenerate() {
 		new CSInterface().evalScript("generateCreateJS({hexColor : true })", function(codeString) {
 			textField.value = prefixField.value + codeString;
 		});
+	} else if(scriptTypesValue == scriptTypesElement.options[2].value) {
+		new CSInterface().evalScript("generatePixiJson()", function(codeString) {
+			textField.value = codeString;
+		})
 	}
 }
 

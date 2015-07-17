@@ -18,6 +18,7 @@
 			<select  class="topcoat-select" id="scriptType">
 				<option value="easeljs">EaselJS tiny API</option>
 				<option value="pixijs">PixiJS tiny API</option>
+				<option value="pixijson">PixiJS graphics</option>
 			</select>
 			<button class="topcoat-button" onClick="onClickButtonGenerate()">Generate</button>
 		</div><br>
@@ -26,15 +27,8 @@
 			<button class="topcoat-button" onClick="onClickButtonSelect()">Select</button>
 		</div><br>
 		<div>
-			<textarea readonly id="output" class="topcoat-textarea" rows="6" cols="20"></textarea>
+			<textarea readonly id="output" class="topcoat-textarea" rows="10" cols="20"></textarea>
 		</div><br>
-		<div>
-			<label class="topcoat-checkbox">
-				<input type="checkbox" id="wrap" onClick="onClickWrap()">
-				<div class="topcoat-checkbox__checkmark"></div>
-				Wrap
-			</label>
-		</div>
 	</div>
 </body>
 
