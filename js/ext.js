@@ -32,3 +32,7 @@ function onClickButtonGenerate() {
 		});
 	}
 }
+
+function onLoaded() {
+	themeManager.init();
+}

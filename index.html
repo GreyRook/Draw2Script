@@ -4,29 +4,37 @@
 <head>
 <meta charset="utf-8">
 <script src="./lib/CSInterface.js"></script>
+<script src="./js/themeManager.js"></script>
 <script src="./js/ext.js"></script>
 
-<link id="ppstyle" rel="stylesheet" type="text/css"
-	href="./css/style.css">
+<link id="hostStyle" rel="stylesheet" type="text/css" href="css/theme.css">
+<link id="theme" rel="stylesheet" type="text/css" href="css/light.css">
 <title>Draw2Script</title>
 </head>
 
 <body onLoad="onLoaded()">
 	<div id="content">
-		<p>
-			<select id="scriptType">
+		<div>
+			<select  class="topcoat-select" id="scriptType">
 				<option value="easeljs">EaselJS tiny API</option>
 				<option value="pixijs">PixiJS tiny API</option>
 			</select>
-			<button class="default" id="btn_ILST"
-				onClick="onClickButtonGenerate()">Generate</button>
-		</p>
-		<p>
-			Prefix: <input type="text" name="prefix" value="Prefix" id="prefix">
-			<button class="default" id="btn_ILST" onClick="onClickButtonSelect()">Select</button>
-		</p>
-		<textarea readonly id="output"></textarea>
-		<p><input type="checkbox" name="wrap" value="Wrap" id="wrap" onClick="onClickWrap()">Wrap</p>
+			<button class="topcoat-button" onClick="onClickButtonGenerate()">Generate</button>
+		</div><br>
+		<div>
+			<input type="text" class="topcoat-text-input" placeholder="Prefix" value="" id="prefix">
+			<button class="topcoat-button" onClick="onClickButtonSelect()">Select</button>
+		</div><br>
+		<div>
+			<textarea readonly id="output" class="topcoat-textarea" rows="6" cols="20"></textarea>
+		</div><br>
+		<div>
+			<label class="topcoat-checkbox">
+				<input type="checkbox" id="wrap" onClick="onClickWrap()">
+				<div class="topcoat-checkbox__checkmark"></div>
+				Wrap
+			</label>
+		</div>
 	</div>
 </body>
 
