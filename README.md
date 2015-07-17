@@ -9,11 +9,12 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
    * EaselJS tiny API
    * PIXI_tiny API
 
-## Installation using Extension Manager
-
- * If you have both CS6 and CC installed together, Draw2Script may use the wrong version of Adobe Extension Manager and install the plugin for CS6 instead of CC, or vice versa
+## Installation using Extension Manager (Adobe CC2014 and CS6)
+ * Install [Extension Manager](https://www.adobe.com/exchange/em_download/)
+ * Run Draw2Script.zxp
+ * If you have both CS6 and CC2014 installed together, Draw2Script may use the wrong version of Adobe Extension Manager and install the plugin for CS6 instead of CC2014, or vice versa
  
-## Manual Installation
+## Installation (Adobe CC2015)
 
  * Download [Zip](https://github.com/GreyRook/Draw2Script/archive/master.zip)
  * Extract Zip to
@@ -21,7 +22,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
      * Win: C:\Program Files (x86)\Common Files\Adobe\CEP\extensions
      * Mac: /Library/Application Support/Adobe/CEP/extensions   
    * or Per-user extension folder
-     * Win: C:\[username]\AppData\Roaming\Adobe\CEP\extensions
+     * Win: C:\\[username]\AppData\Roaming\Adobe\CEP\extensions
 	 * Mac: ~/Library/Application Support/Adobe/CEP/extensions
   
 ## State
