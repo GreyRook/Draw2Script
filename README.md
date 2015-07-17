@@ -15,7 +15,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
  
 ## Manual Installation
 
- * Download Zip[https://github.com/GreyRook/Draw2Script/archive/master.zip]
+ * Download [Zip](https://github.com/GreyRook/Draw2Script/archive/master.zip)
  * Extract Zip to
    * System extension folder
      * Win: C:\Program Files (x86)\Common Files\Adobe\CEP\extensions
