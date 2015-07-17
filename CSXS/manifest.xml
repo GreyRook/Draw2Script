@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ExtensionManifest Version="5.0" ExtensionBundleId="com.greyrook.Draw2Script" ExtensionBundleVersion="0.2.0"
+<ExtensionManifest Version="5.0" ExtensionBundleId="com.greyrook.Draw2Script" ExtensionBundleVersion="0.0.3"
 		ExtensionBundleName="Draw2Script" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="com.greyrook.Draw2Script.extension" Version="0.2.0" />
+		<Extension Id="com.greyrook.Draw2Script.extension" Version="0.0.3" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
-			<Host Name="ILST" Version="[18.0,99]" />
+			<Host Name="ILST" Version="[17.0,99]" />
 		</HostList>
 		<LocaleList>
 			<Locale Code="All" />
@@ -33,11 +33,11 @@
 					<Geometry>
 						<Size>
 							<Height>400</Height>
-							<Width>350</Width>
+							<Width>200</Width>
 						</Size>
 						 <MinSize>
 							<Height>400</Height>
-							<Width>350</Width>
+							<Width>200</Width>
 						</MinSize>
 					</Geometry>
 				</UI>
