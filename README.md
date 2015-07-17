@@ -22,7 +22,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
      * Win: C:\Program Files (x86)\Common Files\Adobe\CEP\extensions
      * Mac: /Library/Application Support/Adobe/CEP/extensions   
    * or Per-user extension folder
-     * Win: C:\\[username]\AppData\Roaming\Adobe\CEP\extensions
+     * Win: C:\Users\\[username]\AppData\Roaming\Adobe\CEP\extensions
 	 * Mac: ~/Library/Application Support/Adobe/CEP/extensions
   
 ## State
