@@ -3,7 +3,7 @@ if(typeof module !== 'undefined') {
     fs = require('fs');
 	var code = fs.readFileSync('js/parser/createjs.js', 'utf-8');
 	eval(code);
-    var code = fs.readFileSync('js/parser/pixitiny.js', 'utf-8');
+    code = fs.readFileSync('js/parser/pixitiny.js', 'utf-8');
     eval(code);
 }
 
