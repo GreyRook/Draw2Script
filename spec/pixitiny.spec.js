@@ -5,8 +5,6 @@ if(typeof module !== 'undefined') {
 	eval(cdoe);
     var code = fs.readFileSync('js/parser/pixitiny.js', 'utf-8');
     eval(code);
-	var code = fs.readFileSync('js/parser/pixigraphics.js', 'utf-8');
-	eval(cdoe);
 }
 
 
