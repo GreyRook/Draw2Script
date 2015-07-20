@@ -1,3 +1,11 @@
+// hack for executing code on node.js
+if(typeof module !== 'undefined') {
+    fs = require('fs');
+    var code = fs.readFileSync('js/parser/createjs.js', 'utf-8');
+    eval(code);
+}
+
+
 // actual test-case
 describe("Createjs Parser Test Suite", function() {
 

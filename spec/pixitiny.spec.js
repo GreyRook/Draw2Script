@@ -1,3 +1,11 @@
+// hack for executing code on node.js
+if(typeof module !== 'undefined') {
+    fs = require('fs');
+    var code = fs.readFileSync('js/parser/pixitiny.js', 'utf-8');
+    eval(code);
+}
+
+
 // actual test-case
 describe("PIXI_tiny Parser Test Suite", function() {
 
