@@ -8,6 +8,8 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
  * Supported Export Formats
    * EaselJS tiny API
    * PIXI_tiny API
+   * PIXI_graphics
+   * JSON
 
 ## Installation using Extension Manager (Adobe CC2014 and CS6)
  * Install [Extension Manager](https://www.adobe.com/exchange/em_download/)
@@ -27,4 +29,4 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
   
 ## State
 
-Alpha / Concept State.
+Beta State.
