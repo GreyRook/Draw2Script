@@ -6,7 +6,7 @@ function generateJSON() {
 	var json = {};
 	json.cropBox = app.activeDocument.cropBox;
 	json.selection = [];
-	for(var i = objects.length - 1; i >= 0; i--) {
+	for(var i = 0; i < objects.length; i++) {
 		if(objects[i].typename == "PathItem") {
 			json.selection.push(parsePathItem(objects[i]));
 		} else if(objects[i].typename == "GroupItem") {
@@ -21,6 +21,7 @@ function generateJSON() {
 function parsePathItem(pathItem) {
 	var json = {};
 	json.typename = "PathItem";
+	json.closed = pathItem.closed;
 	json.filled = pathItem.filled;
 	json.fillColor = pathItem.fillColor;
 	json.opacity = pathItem.opacity;

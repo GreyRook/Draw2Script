@@ -3,13 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="./lib/CSInterface.js"></script>
-<script src="./js/themeManager.js"></script>
 <script src="./lib/jquery-2.1.4.min.js"></script>
-<script src="./js/eventHandler.js"></script>
-<script src="./js/parser/createjs.js"></script>
-<script src="./js/parser/pixitiny.js"></script>
-<script src="./js/parser/pixigraphics.js"></script>
+<script src="./lib/CSInterface.js"></script>
 
 <link id="hostStyle" rel="stylesheet" type="text/css" href="css/theme.css">
 <link id="theme" rel="stylesheet" type="text/css" href="css/light.css">
@@ -22,7 +17,8 @@
 			<select  class="topcoat-select" id="scriptType">
 				<option value="easeljs">EaselJS tiny API</option>
 				<option value="pixijs">PixiJS tiny API</option>
-				<option value="pixijson">PixiJS graphics JSON</option>
+				<option value="pixijson">PixiJS graphics API</option>
+				<option value="json">JSON</option>
 			</select>
 			<button class="topcoat-button" onClick="onClickButtonGenerate()">Generate</button>
 		</div><br>
@@ -34,6 +30,12 @@
 			<textarea readonly id="output" class="topcoat-textarea" rows="10" cols="20"></textarea>
 		</div><br>
 	</div>
+	
+	<script src="./js/themeManager.js"></script>
+	<script src="./js/eventHandler.js"></script>
+	<script src="./js/parser/createjs.js"></script>
+	<script src="./js/parser/pixitiny.js"></script>
+	<script src="./js/parser/pixigraphics.js"></script>
 </body>
 
 </html>
