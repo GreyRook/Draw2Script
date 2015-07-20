@@ -10,6 +10,112 @@ if(typeof module !== 'undefined') {
 describe("Createjs Parser Test Suite", function() {
 
 	var createjs = new Createjs();
+	
+	it("testGenerate", function() {
+		var pathItem = {
+	        "typename" : "PathItem",
+	        "closed" : true,
+	        "filled" : true,
+	        "fillColor" : {
+	            "red" : 0,
+				"green" : 0,
+				"blue" : 0,
+	            "typename" : "RGBColor"
+	        },
+	        "opacity" : 100,
+	        "stroked" : false,
+	        "strokeColor" : {
+	            "cyan" : 0,
+	            "magenta" : 0,
+	            "yellow" : 0,
+	            "black" : 100,
+	            "typename" : "CMYKColor"
+	        },
+	        "strokeDashes" : [
+
+	        ],
+	        "strokeDashOffset" : 0,
+	        "strokeCap" : {},
+	        "strokeJoin" : {},
+	        "strokeMiterLimit" : 10,
+	        "strokeWidth" : 6,
+	        "pathPoints" : [{
+	                "anchor" : [
+	                    0,
+	                    0
+	                ],
+	                "leftDirection" : [
+	                    0,
+	                    0
+	                ],
+	                "rightDirection" : [
+	                    0,
+	                    0
+	                ]
+	            }, {
+	                "anchor" : [
+	                    10,
+	                    0
+	                ],
+	                "leftDirection" : [
+	                    10,
+	                    0
+	                ],
+	                "rightDirection" : [
+	                    10,
+	                    0
+	                ]
+	            }, {
+	                "anchor" : [
+	                    10,
+	                    10
+	                ],
+	                "leftDirection" : [
+	                    10,
+	                    10
+	                ],
+	                "rightDirection" : [
+	                    10,
+	                    10
+	                ]
+	            }, {
+	                "anchor" : [
+	                    0,
+						10
+	                ],
+	                "leftDirection" : [
+	                     0,
+						10
+	                ],
+	                "rightDirection" : [
+	                     0,
+						10
+	                ]
+	            }
+	        ]
+	    };
+		
+		var groupItem = {
+			"typename": "GroupItem",
+			"groupItems": [],
+			"pathItems": [pathItem],
+			"compoundPathItems": []
+		};
+		
+		var json = {
+			"cropBox" : [0,0],
+			"selection" : [groupItem]
+		}
+		
+		createjs.cropBox = json.cropBox;
+		
+		var expectedResult = ".f('rgba(0,0,0,1)').p('" + 
+			createjs.convertPathItemToPathInstruction(pathItem) + "').ef().cp()"
+		this.cropBox = json.cropBox;
+		var result = createjs.generate(json);
+		expect(result).toBe(expectedResult);
+
+	});
 
 	it("testConvertPathItemToPathInstruction", function() {
 		createjs.cropBox = [0,0];
