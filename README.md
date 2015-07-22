@@ -10,6 +10,10 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
    * PIXI_tiny API
    * PIXI_graphics
    * JSON
+   
+## Screenshot
+
+![Ellipse PIXI_tiny](docs/draw2script_screenshot_ellipse_pixi_tiny.png)
 
 ## Installation using Extension Manager (Adobe CC2014 and CS6)
  * Install [Extension Manager](https://www.adobe.com/exchange/em_download/)
