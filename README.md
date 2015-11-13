@@ -22,7 +22,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
  
 ## Installation
 
-# Adobe Illustrator CC
+### Adobe Illustrator CC
 
  * Visit [Adobe Add-ons](https://creative.adobe.com/addons/products/12429)
  * Search for Draw2Script
