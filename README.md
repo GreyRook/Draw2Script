@@ -15,11 +15,7 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
 
 ![Ellipse PIXI_tiny](docs/draw2script_screenshot_ellipse_pixi_tiny.png)
 
-## Installation using Extension Manager (Adobe CC2014 and CS6)
- * Install [Extension Manager](https://www.adobe.com/exchange/em_download/)
- * Run Draw2Script.zxp
- * If you have both CS6 and CC2014 installed together, Draw2Script may use the wrong version of Adobe Extension Manager and install the plugin for CS6 instead of CC2014, or vice versa
- 
+
 ## Installation
 
 ### Adobe Illustrator CC
@@ -30,6 +26,13 @@ Export Source Code from Adobe Illustrator.  Inspired by [DrawScript](http://draw
  * Draw2Script should be copied to your local drive via the Creative Cloud Desktop App
  * If you encounter problems visit https://www.adobeexchange.com/resources/19
   
+### Adobe CC2014 and CS6 (using Extension Manager)
+ * Install [Extension Manager](https://www.adobe.com/exchange/em_download/)
+ * Run Draw2Script.zxp
+ * If you have both CS6 and CC2014 installed together, Draw2Script may use the wrong version of Adobe Extension Manager and install the plugin for CS6 instead of CC2014, or vice versa
+
+
+
 ## State
 
 Beta State.
